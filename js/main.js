@@ -29,19 +29,11 @@ document.addEventListener("keydown", function (event) {
 // должны сортироваться как числа, а не как строки.
 const th = document.querySelector("th");
 th.addEventListener("click", function () {
-  const trs = document.querySelectorAll("td");
-  let arr = [];
-  for (let item of trs) {
-    arr.push(item.innerHTML);
-  }
-  arr.sort((a, b) => {
-    return a - b;
+  let arr = Array.from(table.rows).slice(1);
+  arr.sort(function (a, b) {
+    return a.cells[0].innerHTML > b.cells[0].innerHTML ? 1 : -1;
   });
-  let i = 0;
-  for (let item of trs) {
-    item.innerHTML = arr[i];
-    ++i;
-  }
+  table.append(...arr);
 });
 // Создать HTML-страницу с блоком текста в рамочке. Реализовать возможность изменять размер блока,
 // если зажать мышку в правом нижнем углу и тянуть ее дальше.
