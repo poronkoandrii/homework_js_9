@@ -27,14 +27,21 @@ document.addEventListener("keydown", function (event) {
 // Создать HTML-страницу с большой таблицей. При клике по заголовку колонки,
 // необходимо отсортировать данные по этой колонке. Учтите, что числовые значения
 // должны сортироваться как числа, а не как строки.
-const th = document.querySelector("th");
-th.addEventListener("click", function () {
+table.onclick = function (event) {
+  let target = event.target;
+  if (target.tagName === "TH") {
+    let id = target.id;
+    sortTable(id);
+  }
+};
+function sortTable(id) {
   let arr = Array.from(table.rows).slice(1);
+  let i = id;
   arr.sort(function (a, b) {
-    return a.cells[0].innerHTML > b.cells[0].innerHTML ? 1 : -1;
+    return a.cells[i].innerHTML > b.cells[i].innerHTML ? 1 : -1;
   });
   table.append(...arr);
-});
+}
 // Создать HTML-страницу с блоком текста в рамочке. Реализовать возможность изменять размер блока,
 // если зажать мышку в правом нижнем углу и тянуть ее дальше.
 
